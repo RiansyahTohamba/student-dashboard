@@ -1,12 +1,5 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-AdminUser.create!(email: 'admin@uho.ac.id', password: 'ceknilai', password_confirmation: 'ceknilai')
+require 'dotenv/rails'
+AdminUser.create!(email: 'admin@uho.ac.id', password: ENV['admin_password'], password_confirmation: ENV['admin_password'])
 Course.create!(name: 'Komputasi Paralel & Terdistribusi')
 Course.create!(name: 'Sistem Operasi')
+

@@ -17,6 +17,9 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 </head>
 <body class="bg-gray-100">
+    <h1 class="text-3xl font-bold text-center text-blue-500 mb-4">UHO Student Performance Dashboard</h1>
+    <h2 class="text-3xl font-bold text-center text-blue-500 mb-4"><%= @course_title  %></h2>
+    <img class="h-20 w-20 mx-auto rounded-full border-2 border-blue-500 mb-6" src="<%= asset_path('Logo_Universitas_Halu_Oleo.png') %>" alt="UHO Logo">
     <div class="p-6 max-w-6xl mx-auto">
         <%= yield %>
     </div>
