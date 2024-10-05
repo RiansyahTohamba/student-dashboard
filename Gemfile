@@ -26,6 +26,16 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "csv", "~> 3.3"
+
+gem "octokit", "~> 9.1"
+
+gem "faraday", "~> 2.12"
+
+gem "faraday-retry", "~> 2.2"
+
+gem "faraday-multipart", "~> 1.0"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
