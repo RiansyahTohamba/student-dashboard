@@ -8,6 +8,9 @@ class CoursesController < ApplicationController
 
   # GET /courses/1 or /courses/1.json
   def show
+    @total_commits = 10
+    @average_commits = 100
+    @top_performer = { name: "bionda", commits: 100}
   end
 
   # GET /courses/new
