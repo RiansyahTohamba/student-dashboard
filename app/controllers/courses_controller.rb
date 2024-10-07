@@ -8,40 +8,21 @@ class CoursesController < ApplicationController
 
   # GET /courses/1 or /courses/1.json
   def show
-    @total_commits = 10
-    @average_commits = 100
-    @top_performer = { name: "bionda", commits: 100}
-
+    low_commit_threshold = 3
     @students = Student.where(course_id: params[:id])
-    @bottom_students = Student.where("commits < ?", 5)
-    # results = db_orm.execute("SELECT SUM(commits) AS total_commits, AVG(commits) AS average_commits, MAX(commits) AS top_performer, MAX(lines_added - lines_deleted) AS top_contributor FROM students")
-    # result_arr  =  results.to_a[0]
-    # @total_commits = result_arr[0]
-    # @average_commits = result_arr[1]
-    # @bottom_students = db_orm[:students].where(Sequel[:commits] < LOW_COMMIT_THRESHOLD).order(:commits).to_a
-    # top_commit = result_arr[2]
-    # @top_performer = db_orm[:students].where(commits: top_commit).first
-    # Assuming you have a `Student` model and necessary columns in the database
+    # Query to calculate total, average, and maximum commits and contributions
+    results = Student.select(
+      'SUM(commits) AS total_commits',
+      'AVG(commits) AS average_commits',
+      'MAX(commits) AS top_performer',
+      'MAX(lines_added - lines_deleted) AS top_contributor'
+    ).first
 
-    # # Query to calculate total, average, and maximum commits and contributions
-    # results = Student.select(
-    #   'SUM(commits) AS total_commits',
-    #   'AVG(commits) AS average_commits',
-    #   'MAX(commits) AS top_performer',
-    #   'MAX(lines_added - lines_deleted) AS top_contributor'
-    # ).first
-
-    # # Extract the results
-    # @total_commits = results.total_commits
-    # @average_commits = results.average_commits
-
-    # # Define the threshold for low commits (adjust LOW_COMMIT_THRESHOLD)
-    # @bottom_students = Student.where("commits < ?", LOW_COMMIT_THRESHOLD).order(:commits)
-
-    # # Find the top performer based on commit count
-    # top_commit = results.top_performer
-    # @top_performer = Student.find_by(commits: top_commit)
-
+    @total_commits = results.total_commits
+    @average_commits = results.average_commits.to_i
+    @top_performer = Student.find_by(commits: results.top_performer)
+    
+    @bottom_students = Student.where("commits < ?", low_commit_threshold).order(:commits)
   end
 
   # GET /courses/new

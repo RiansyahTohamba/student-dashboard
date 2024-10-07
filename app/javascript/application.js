@@ -6,11 +6,19 @@ document.addEventListener("DOMContentLoaded", function() {
   const studentsData = JSON.parse(document.getElementById('students-data').textContent);
   const bottomStudentsData = JSON.parse(document.getElementById('bottom-students-data').textContent);
 
+  
+  const commitData = studentsData.map(student => ({
+    y: student.commits,
+    x: student.id,
+    name: student.name
+  }));
+  
   const performanceData = studentsData.map(student => ({
     y: student.commits,
     x: student.lines_added,
     name: student.name
   }));
+
 
   const studentNames = studentsData.map(student => student.name);
   const linesAddedData = studentsData.map(student => student.lines_added);
@@ -33,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
       data: {
           datasets: [{
               label: 'Students',
-              data: studentsData,
+              data: commitData,
               backgroundColor: 'rgba(75, 192, 192, 0.6)'
           }]
       },

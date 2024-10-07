@@ -25,8 +25,8 @@ def read_csv(csv_file, course_id)
 end
 
 def main()
-  paralel_course = Course.where(name: 'Komputasi Paralel & Terdistribusi').first
-  read_csv('./db/data/paralel_students.csv',paralel_course.id)  
+  # paralel_course = Course.where(name: 'Komputasi Paralel & Terdistribusi').first
+  # read_csv('./db/data/paralel_students.csv',paralel_course.id)  
   os_course = Course.where(name: 'Sistem Operasi').first
   read_csv('./db/data/os_students.csv',os_course.id)  
 end

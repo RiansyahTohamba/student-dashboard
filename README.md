@@ -5,7 +5,9 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby & Rails version
+Ruby 3.3
+Rails 7
 
 * System dependencies
 
@@ -18,6 +20,9 @@ Things you may want to cover:
 * How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
+## cronjob
+Setelah Anda mengatur jadwal di schedule.rb, terapkan cron job dengan menjalankan perintah:
+whenever --update-crontab
 
 * Deployment instructions
 
