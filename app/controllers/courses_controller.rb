@@ -9,9 +9,10 @@ class CoursesController < ApplicationController
   # GET /courses/1 or /courses/1.json
   def show
     low_commit_threshold = 3
-    @students = Student.where(course_id: params[:id])
+    course_id = params[:id]
+    @students = Student.where(course_id: course_id)
     # Query to calculate total, average, and maximum commits and contributions
-    results = Student.select(
+    results = Student.where(course_id: course_id).select(
       'SUM(commits) AS total_commits',
       'AVG(commits) AS average_commits',
       'MAX(commits) AS top_performer',
@@ -20,9 +21,10 @@ class CoursesController < ApplicationController
 
     @total_commits = results.total_commits
     @average_commits = results.average_commits.to_i
-    @top_performer = Student.find_by(commits: results.top_performer)
-    
-    @bottom_students = Student.where("commits < ?", low_commit_threshold).order(:commits)
+    @top_performer = Student.find_by(commits: results.top_performer, course_id: course_id)
+    @bottom_students = Student
+      .where("commits < ? AND course_id = ?", low_commit_threshold, course_id)
+      .order(:commits)
   end
 
   # GET /courses/new
