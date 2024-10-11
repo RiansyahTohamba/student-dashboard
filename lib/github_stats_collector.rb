@@ -10,7 +10,6 @@ class GitHubStatsCollector
     start_date = Date.today - 120 
     end_date = Date.today
     stats = {}
-
     account_gits.each do |account|
       p "collecting data #{account}"
       stats[account] = {

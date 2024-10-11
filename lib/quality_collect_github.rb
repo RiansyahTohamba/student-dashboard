@@ -1,8 +1,11 @@
-class GitHubStatsCollector
-  VALID_EXTENSIONS = %w[.rb .py .js .css .go .conf]
-
+class QualityGitHubStatsCollector
+  VALID_EXTENSIONS = %w[.rb .py .php .go .mod .rake .js .json .css .sqlite3 .yml .conf .md]
   def initialize(access_token)
     @client = Octokit::Client.new(access_token: access_token)
+  end
+
+  def collect_only_code(repo, account_gits)
+    
   end
 
   def collect_stats(repo, account_gits)
@@ -32,9 +35,9 @@ class GitHubStatsCollector
 
   private
 
-  def process_commit_files(commit, account_stats)
-    commit.files.each do |file|
-      next unless valid_file_type?(file.filename)
+  def process_commit_files(detail_commits, account_stats)
+    detail_commits.files.each do |dc|
+      next unless valid_file_type?(dc.filename)
 
       account_stats[:additions] += file.additions
       account_stats[:deletions] += file.deletions
