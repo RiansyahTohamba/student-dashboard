@@ -1,12 +1,18 @@
 require 'dotenv/rails'
-p 'init seed for course and admin'
-# AdminUser.create!(email: 'admin@uho.ac.id', password: ENV['admin_password'], password_confirmation: ENV['admin_password'])
-# Course.create!(name: 'Komputasi Paralel & Terdistribusi')
-# Course.create!(name: 'Sistem Operasi')
+
+def  init_course_admin
+  p "init seed for admin "
+
+  AdminUser.create!(email: 'admin@uho.ac.id', password: ENV['admin_password'], password_confirmation: ENV['admin_password'])
+  muhriansyah = AdminUser.create!(email: 'muh.riansyaht@uho.ac.id', password: ENV['admin_password'], password_confirmation: ENV['admin_password'])
+  mriansyah = AdminUser.create!(email: 'mriansyah@uho.ac.id', password: ENV['admin_password'], password_confirmation: ENV['admin_password'])
+  # p 'init seed for course'
+  # Course.create!(name: 'Komputasi Paralel & Terdistribusi',user_id: muhriansyah.id)
+  # Course.create!(name: 'Sistem Operasi',user_id: mriansyah.id)
+end
 
 
 def read_csv(csv_file, course_id)
-  # CSV.foreach(csv_file, headers: :first_row) do |row|
   CSV.foreach(csv_file, headers: true, col_sep: ';') do |row|
     st = Student.find_or_create_by(name: row['name'])
     st.nim = row['nim']
@@ -25,10 +31,11 @@ def read_csv(csv_file, course_id)
 end
 
 def main()
+  init_course_admin
   # paralel_course = Course.where(name: 'Komputasi Paralel & Terdistribusi').first
   # read_csv('./db/data/paralel_students.csv',paralel_course.id)  
-  os_course = Course.where(name: 'Sistem Operasi').first
-  read_csv('./db/data/os_students.csv',os_course.id)  
+  # os_course = Course.where(name: 'Sistem Operasi').first
+  # read_csv('./db/data/os_students.csv',os_course.id)  
 end
 
 main()
