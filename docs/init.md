@@ -9,5 +9,5 @@ rails db:seed
 docker build -t edutrack .
 
 # container
-docker run --name edutrack --cpus=2 --memory=2g -p 3000:3000 my-rails-app
+docker run --name edutrack --cpus=2 --memory=2g -p 8899:8899 edutrack-1
 

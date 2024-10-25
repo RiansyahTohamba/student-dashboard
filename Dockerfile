@@ -15,7 +15,7 @@ RUN bundle install
 COPY . .
 
 # Expose the port for the Rails server
-EXPOSE 3000
+EXPOSE 8899
 
 # Set environment variables (adjust as needed)
 ENV RAILS_ENV=development
