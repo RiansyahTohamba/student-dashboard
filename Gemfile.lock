@@ -362,6 +362,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  bcrypt
   bootsnap
   capybara
   csv (~> 3.3)

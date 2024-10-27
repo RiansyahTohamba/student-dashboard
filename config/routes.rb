@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
-  # get 'sessions/new'
-  # get 'sessions/create'
-  # get 'sessions/destroy'
+  devise_for :users
+  root "courses#index"
   
-  get    '/login',   to: 'sessions#new'
-  post   '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  # resources students ini hanya untuk admin
   resources :students
+  # resources course hanya untuk admin juga, kecuali course/show/1
   resources :courses
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -19,5 +16,12 @@ Rails.application.routes.draw do
   # get "/course/sync/" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "courses#index"
+
+  # get 'sessions/new'
+  # get 'sessions/create'
+  # get 'sessions/destroy'
+  # get    '/login',   to: 'sessions#new'
+  # post   '/login',   to: 'sessions#create'
+  # delete '/logout',  to: 'sessions#destroy'
+
 end

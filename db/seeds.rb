@@ -1,14 +1,26 @@
 require 'dotenv/rails'
 
 def  init_course_admin
-  p "init seed for admin "
-
-  AdminUser.create!(email: 'admin@uho.ac.id', password: ENV['admin_password'], password_confirmation: ENV['admin_password'])
-  muhriansyah = AdminUser.create!(email: 'muh.riansyaht@uho.ac.id', password: ENV['admin_password'], password_confirmation: ENV['admin_password'])
-  mriansyah = AdminUser.create!(email: 'mriansyah@uho.ac.id', password: ENV['admin_password'], password_confirmation: ENV['admin_password'])
-  # p 'init seed for course'
-  # Course.create!(name: 'Komputasi Paralel & Terdistribusi',user_id: muhriansyah.id)
-  # Course.create!(name: 'Sistem Operasi',user_id: mriansyah.id)
+  p "init seed for admin #{ENV['admin_password']}"
+  muhriansyah = User.create!(
+    email: 'muh.riansyaht@uho.ac.id',
+    username: 'Muhammad Riansyah Tohamba',
+    password: "#{ENV['admin_password']}",
+    password_confirmation: "#{ENV['admin_password']}"
+  )
+  mriansyah = User.create!(
+    email: 'mriansyah93@uho.ac.id',
+    username: 'La Bionda Tohamba',
+    password: "#{ENV['admin_password']}",
+    password_confirmation: "#{ENV['admin_password']}"
+  )
+  
+  paralel = Course.new(name: 'Komputasi Paralel & Terdistribusi')
+  paralel.user = muhriansyah
+  paralel.save!
+  os = Course.new(name: 'Sistem Operasi')
+  os.user = mriansyah
+  os.save!
 end
 
 
@@ -31,11 +43,11 @@ def read_csv(csv_file, course_id)
 end
 
 def main()
-  init_course_admin
-  # paralel_course = Course.where(name: 'Komputasi Paralel & Terdistribusi').first
-  # read_csv('./db/data/paralel_students.csv',paralel_course.id)  
-  # os_course = Course.where(name: 'Sistem Operasi').first
-  # read_csv('./db/data/os_students.csv',os_course.id)  
+  # init_course_admin
+  paralel_course = Course.where(name: 'Komputasi Paralel & Terdistribusi').first
+  read_csv('./db/data/paralel_students.csv',paralel_course.id)  
+  os_course = Course.where(name: 'Sistem Operasi').first
+  read_csv('./db/data/os_students.csv',os_course.id)  
 end
 
 main()

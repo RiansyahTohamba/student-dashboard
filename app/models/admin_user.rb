@@ -4,3 +4,10 @@ class AdminUser < ApplicationRecord
   devise :database_authenticatable, 
          :recoverable, :rememberable, :validatable
 end
+
+# # app/models/user.rb
+# class User < ApplicationRecord
+#   has_secure_password
+#   validates :email, presence: true, uniqueness: true
+#   validates :username, presence: true
+# end
