@@ -43,7 +43,7 @@ def read_csv(csv_file, course_id)
 end
 
 def main()
-  # init_course_admin
+  init_course_admin
   paralel_course = Course.where(name: 'Komputasi Paralel & Terdistribusi').first
   read_csv('./db/data/paralel_students.csv',paralel_course.id)  
   os_course = Course.where(name: 'Sistem Operasi').first
@@ -51,4 +51,6 @@ def main()
 end
 
 main()
-
+# setelah itu jalankan command
+# rake git_sync:paralel_commit
+# rake git_sync:os_commit

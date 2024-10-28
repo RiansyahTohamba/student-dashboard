@@ -1,9 +1,15 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :require_head_lecturer, only: %i[new create edit update]
 
   # GET /courses or /courses.json
   def index
-    @courses = Course.all
+    # @courses = Course.where(user_id: current_user.id)
+    @courses = if current_user.head_lecturer?
+      Course.all
+    else
+      current_user.courses
+    end
   end
 
   # GET /courses/1 or /courses/1.json

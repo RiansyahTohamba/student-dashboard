@@ -8,4 +8,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     devise_parameter_sanitizer.permit(:account_update, keys: [:username])
   end
+  def require_head_lecturer
+    unless current_user.head_lecturer?
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to root_path
+    end
+  end
 end

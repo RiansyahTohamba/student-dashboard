@@ -1,11 +1,8 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 
 document.addEventListener("DOMContentLoaded", function() {
-  console.log('load course dashboard');
-
   const studentsData = JSON.parse(document.getElementById('students-data').textContent);
   const bottomStudentsData = JSON.parse(document.getElementById('bottom-students-data').textContent);
-
   
   const commitData = studentsData.map(student => ({
     y: student.commits,
@@ -30,7 +27,13 @@ document.addEventListener("DOMContentLoaded", function() {
       columns: [
           { data: 'id', title: 'ID' },
           { data: 'name', title: 'Name' },
-          { data: 'commits', title: 'Commits' }
+          { data: 'commits', title: 'Commits' },
+          {
+            title: 'Actions',
+            render: function (data, type, row) {
+                return "<a href='/students/"+row.id+"'>Show</a>";
+            }
+        }
       ],
       order: [[2, 'asc']] // Sort by the third column (commits) in ascending order
   });
